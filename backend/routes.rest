@@ -1,0 +1,35 @@
+GET http://localhost:8080/person HTTP/1.1
+
+###
+
+GET  http://localhost:8080/about HTTP/1.1
+
+###
+
+POST http://localhost:8080/person HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "Srow77",
+    "password": "S#42*Ed",
+    "firstName": "Stewart",
+    "lastName": "Rowley",
+    "email": "stewy.rowley@gmail.com",
+    "phoneNumber": "509-301-0726",
+    "profile": {
+        "degree": "Software Engineering",
+        "career": "Web Developer",
+        "location": "Walla Walla, Wa"
+    }
+}
+
+###
+
+POST http://localhost:8080/about HTTP/1.1
+Content-Type: application/json
+
+{  
+     "_id": "63499316e20a9f822ba90afd",
+    "skills": ["Tennis", "Programming", "Basketball"],
+    "hobbies": ["Board Games", "Watching NHL Hockey", "Sports"]
+}
