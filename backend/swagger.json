@@ -125,6 +125,9 @@
                 },
                 "skills": {
                   "example": "any"
+                },
+                "hobbies": {
+                  "example": "any"
                 }
               }
             }
@@ -143,12 +146,12 @@
         }
       }
     },
-    "/about/{aboutId}": {
+    "/about/{_id}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "aboutId",
+            "name": "_id",
             "in": "path",
             "required": true,
             "type": "string"
