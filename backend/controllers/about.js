@@ -10,7 +10,7 @@ exports.createAbout = (req, res) => {
   const about = new About({
     _id: req.body._id,
     skills: req.body.skills,
-    hobbies: req.body.skills,
+    hobbies: req.body.hobbies,
   });
   about.save(about).then((data) => {
     console.log(data);
