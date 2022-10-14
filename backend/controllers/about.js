@@ -37,15 +37,15 @@ exports.getAboutAll = (req, res) => {
 
 
 exports.getAbout = (req, res) => {
-  const aboutId = req.params.aboutId;
-  About.find({ aboutId: aboutId })
+  const _id = req.params._id;
+  About.find({ _id: _id })
     .then((data) => {
-      if (!data) res.status(404).send({ message: 'Not found in about' + aboutId });
+      if (!data) res.status(404).send({ message: 'Not found in about' + _id });
       else res.send(data[0]);
     })
     .catch((error) => {
       res.status(500).send({
-        message: 'Error retrieving aboutId' + aboutId,
+        message: 'Error retrieving aboutId' + _id,
         error: error
       });
     });
