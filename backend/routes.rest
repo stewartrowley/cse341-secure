@@ -10,7 +10,7 @@ GET  http://localhost:8080/about HTTP/1.1
 
 ###
 
-GET http://localhost:8080/about/6349eb442881d62912e69db3 HTTP/1.1
+GET http://localhost:8080/about/6349f9bf3f8760d53a78ea41 HTTP/1.1
 
 ###
 
@@ -37,7 +37,7 @@ POST http://localhost:8080/about HTTP/1.1
 Content-Type: application/json
 
 {  
-     "_id": "6349eb442881d62912e69db3",
+     "_id": "6349f9bf3f8760d53a78ea41",
     "skills": ["Tennis", "Programming", "Basketball"],
     "hobbies": ["Board Games", "Watching NHL Hockey", "Sports"]
 }
@@ -83,7 +83,7 @@ POST https://cse341-secured.onrender.com/about HTTP/1.1
 Content-Type: application/json
 
 {  
-     "_id": "6349eba1d458bc4bf5ac8f34",
+     "_id": "6349fa142adb051494634ff4",
     "skills": ["Drawing", "Painting", "Design"],
     "hobbies": ["Board Games", "Movies", "Sports"],
 }
