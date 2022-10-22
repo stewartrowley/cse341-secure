@@ -74,7 +74,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/person/Erow44 HTTP/1.1
+DELETE http://localhost:8080/person/Srow77 HTTP/1.1
 Content-Type: application/json
 
 ###
@@ -127,5 +127,44 @@ Content-Type: application/json
     "skills": ["Painting", "Design", "Drawing"],
     "hobbies": ["Board Games", "Watching NHL Hockey", "Sports"]
 }
+
+###
+
+PUT https://cse341-secured.onrender.com/person/Srow77 HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "Srow77",
+    "password": "S%te34=E",
+    "firstname": "Stewart",
+    "lastname": "Rowley",
+    "email": "stewy.rowley@gmail.com",
+    "phoneNumber": "509-301-0726",
+    "profile": {
+        "degree": "Software Engineering",
+        "career": "Web Developer",
+        "location": "Walla Walla Wa"
+    }
+}
+
+###
+
+PUT https://cse341-secured.onrender.com/about/6349f9bf3f8760d53a78ea41 HTTP/1.1
+Content-Type: application/json
+
+{
+    "skills": ["Tennis", "Programming", "Basketball", "Ultimate Frisbee"],
+    "hobbies": ["Board Games", "Watching NHL Hockey", "Sports"]
+}
+
+###
+
+DELETE https://cse341-secured.onrender.com/person/Srow77 HTTP/1.1
+Content-Type: application/json
+
+###
+
+DELETE https://cse341-secured.onrender.com/about/6352d468e08a832d1cd111afHTTP/1.1
+Content-Type: application/json
 
 ###
