@@ -2,7 +2,7 @@ const db = require('../models');
 const About = db.about;
 
 exports.createAbout = (req, res) => {
-  if(!req.body._id) {
+  if (!req.body._id) {
     res.status(400).send({ message: 'Content can"t be empty' });
     return;
   }
@@ -10,18 +10,20 @@ exports.createAbout = (req, res) => {
   const about = new About({
     _id: req.body._id,
     skills: req.body.skills,
-    hobbies: req.body.hobbies,
+    hobbies: req.body.hobbies
   });
-  about.save(about).then((data) => {
-    console.log(data);
-    res.status(201).send(data);
-  })
-  .catch((error) => {
-    res.status(500).send({
-      message: error.message || 'Some error occurred while creating about information'
+  about
+    .save(about)
+    .then((data) => {
+      console.log(data);
+      res.status(201).send(data);
     })
-  })
-}
+    .catch((error) => {
+      res.status(500).send({
+        message: error.message || 'Some error occurred while creating about information'
+      });
+    });
+};
 
 exports.getAboutAll = (req, res) => {
   About.find({})
@@ -34,7 +36,6 @@ exports.getAboutAll = (req, res) => {
       });
     });
 };
-
 
 exports.getAbout = (req, res) => {
   const _id = req.params._id;
@@ -49,4 +50,46 @@ exports.getAbout = (req, res) => {
         error: error
       });
     });
+};
+
+exports.updateAbout = (req, res) => {
+  try {
+    const _id = req.params._id;
+    if (!_id) {
+      res.status(400).send({ message: 'Invalid Id' });
+      return;
+    }
+    About.findOne({ _id: _id }, function (error, about) {
+      about.skills = req.params.skills;
+      about.hobbies = req.params.hobbies;
+      about.save(function (error) {
+        if (error) {
+          res.status(500).json(error || 'Some error occurred while updating the person.');
+        } else {
+          res.status(204).send();
+        }
+      });
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.deleteAbout = (req, res) => {
+  try {
+    const _id = req.params._id;
+    if (!_id) {
+      res.status(400).send({ message: 'Invalid id' });
+      return;
+    }
+    About.deleteOne({ _id: _id }, function (error, result) {
+      if (error) {
+        res.status(500).json(error || 'Some error occurred while deleting the about section.');
+      } else {
+        res.status(204).send(result);
+      }
+    });
+  } catch (error) {
+    res.status(500).json(error || 'Some error occurred while deleting the about section.');
+  }
 };

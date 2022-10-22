@@ -1,4 +1,5 @@
 const db = require('../models');
+const passwordUtil = require('../utils/passwordChecker');
 const Person = db.person;
 
 exports.create = (req, res) => {
@@ -33,7 +34,6 @@ exports.getAll = (req, res) => {
     });
 };
 
-
 exports.getPerson = (req, res) => {
   const username = req.params.username;
   Person.find({ username: username })
@@ -47,4 +47,59 @@ exports.getPerson = (req, res) => {
         error: error
       });
     });
+};
+
+exports.updatePerson = (req, res) => {
+  try {
+    const username = req.params.username;
+    if (!username) {
+      res.status(400).send({ message: 'Invalid username' });
+      return;
+    }
+
+    const password = req.body.password;
+    const passwordCheck = passwordUtil.passwordPass(password);
+    if (passwordCheck.error) {
+      res.status(400).send({ message: passwordCheck.error });
+      return;
+    }    
+
+    Person.findOne({ username: username }, function (error, person) {
+      person.username = req.params.username;
+      person.password = req.params.password;
+      person.firstName = req.params.firstName;
+      person.lastName = req.params.lastName;
+      person.email = req.params.email;
+      person.phoneNumber = req.params.phoneNumber;
+      person.profile = req.params.profile;
+      person.save(function (error) {
+        if (error) {
+          res.status(500).json(error || 'Some error occurred while updating the person.');
+        } else {
+          res.status(204).send();
+        }
+      });
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.deletePerson = (req, res) => {
+  try {
+    const username = req.params.username;
+    if (!username) {
+      res.status(400).send({ message: 'Invalid Username' });
+      return;
+    }
+    Person.deleteOne({ username: username }, function (error, result) {
+      if (error) {
+        res.status(500).json(error || 'Some error occurred while deleting the person.');
+      } else {
+        res.status(204).send(result);
+      }
+    });
+  } catch (error) {
+    res.status(500).json(error || 'Some error occurred while deleting the person.');
+  }
 };
